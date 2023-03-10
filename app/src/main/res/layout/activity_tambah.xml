@@ -22,17 +22,17 @@
         android:id="@+id/et_tanggal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tanggal"/>
+        android:hint="Tanggal"/>
     <EditText
         android:id="@+id/et_jam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Jam"/>
+        android:hint="Jam"/>
     <EditText
         android:id="@+id/et_kegiatan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kegiatan"/>
+        android:hint="Kegiatan"/>
 
     <Button
         android:id="@+id/btn_tambah"
