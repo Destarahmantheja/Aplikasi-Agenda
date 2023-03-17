@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Tidak ada data", Toast.LENGTH_SHORT).show();
         }
         else {
+            arrTanggal.clear();
+            arrJam.clear();
+            arrKegiatan.clear();
+            
             while (varCursor.moveToNext()){
                 arrTanggal.add(varCursor.getString(1));
                 arrJam.add(varCursor.getString(2));
