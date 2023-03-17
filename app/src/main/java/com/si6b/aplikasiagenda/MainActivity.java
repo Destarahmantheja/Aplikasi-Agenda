@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             arrTanggal.clear();
             arrJam.clear();
             arrKegiatan.clear();
-            
+
             while (varCursor.moveToNext()){
                 arrTanggal.add(varCursor.getString(1));
                 arrJam.add(varCursor.getString(2));
