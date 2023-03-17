@@ -1,11 +1,14 @@
 package com.si6b.aplikasiagenda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -43,11 +46,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void tampilAgenda(){
+        Cursor varCursor = myDB.bacaDataAgenda();
+        if (varCursor.getCount()== 0){
+            Toast.makeText(this, "Tidak ada data", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            while (varCursor.moveToNext()){
+                arrTanggal.add(varCursor.getString(1));
+                arrJam.add(varCursor.getString(2));
+                arrKegiatan.add(varCursor.getString(3));
+            }
+
+            adAgenda = new AdapterAgenda(MainActivity.this, arrTanggal, arrJam, arrKegiatan);
+            rvAgenda.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            rvAgenda.setAdapter(adAgenda);
+        }
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        tampilAgenda();
     }
 }
