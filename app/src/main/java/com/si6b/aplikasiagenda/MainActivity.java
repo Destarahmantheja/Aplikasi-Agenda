@@ -9,10 +9,14 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabTambah;
     private RecyclerView rvAgenda;
+    private MyDatabaseHelper myDB;
+    private AdapterAgenda adAgenda;
+    private ArrayList<String> arrTanggal, arrJam, arrKegiatan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +33,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        myDB = new MyDatabaseHelper(MainActivity.this);
+        arrTanggal = new ArrayList<>();
+        arrJam = new ArrayList<>();
+        arrKegiatan = new ArrayList<>();
+    }
+
+    private void SQLitetoArrayList(){
+
+    }
+    private void tampilAgenda(){
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
