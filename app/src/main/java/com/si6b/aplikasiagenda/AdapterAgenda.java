@@ -1,10 +1,13 @@
 package com.si6b.aplikasiagenda;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +55,41 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.VHAgenda> 
             tvTanggal = itemView.findViewById(R.id.tv_tanggal);
             tvJam = itemView.findViewById(R.id.tv_jam);
             tvKegiatan = itemView.findViewById(R.id.tv_kegiatan);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder pesan = new AlertDialog.Builder(ctx);
+                    pesan.setTitle("Perhatian");
+                    pesan.setMessage("Anda memilih agenda dengan ID " + tvId.getText().toString() + ". Perintah apa yang anda inginkan?");
+                    pesan.setMessage("Perhatian apa yang anda inginkan?");
+                    pesan.setCancelable(true);
+
+                    pesan.setNegativeButton("hapus", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MyDatabaseHelper myDB = new MyDatabaseHelper(ctx);
+                            long eks = myDB.hapusAgenda(tvId.getText().toString());
+                            if (eks == -1){
+                                Toast.makeText(ctx, "Gagal Menghapus Data!", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(ctx, "berhasil Menghapus Data!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                ((MainActivity)ctx).onResume();
+                            }
+                        }
+                    });
+                    pesan.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    pesan.show();
+                    return false;
+                }
+            });
 
         }
     }
