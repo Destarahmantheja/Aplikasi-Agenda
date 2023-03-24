@@ -63,4 +63,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return varCursor;
     }
+    public long hapusAgenda (String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        long eksekusi = db.delete(TABLE_NAME, "id = ?", new String[]{id});
+        return eksekusi;
+    }
+    public long ubahAgenda(String id, String tanggal, String jam, String kegiatan){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(FIELD_TANGGAL, tanggal);
+        cv.put(FIELD_JAM, jam);
+        cv.put(FIELD_KEGIATAN, kegiatan);
+
+        long eksekusi = db.update(TABLE_NAME, cv, "id ?", new String[]{id});
+        return eksekusi;
+    }
 }
