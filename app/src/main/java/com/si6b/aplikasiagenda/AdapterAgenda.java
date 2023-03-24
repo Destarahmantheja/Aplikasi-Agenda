@@ -74,7 +74,7 @@ public class AdapterAgenda extends RecyclerView.Adapter<AdapterAgenda.VHAgenda> 
                                 Toast.makeText(ctx, "Gagal Menghapus Data!", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(ctx, "berhasil Menghapus Data!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ctx, "Berhasil Menghapus Data!", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                                 ((MainActivity)ctx).onResume();
                             }
