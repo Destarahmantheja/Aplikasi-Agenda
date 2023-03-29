@@ -76,7 +76,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(FIELD_JAM, jam);
         cv.put(FIELD_KEGIATAN, kegiatan);
 
-        long eksekusi = db.update(TABLE_NAME, cv, "id ?", new String[]{id});
+        long eksekusi = db.update(TABLE_NAME, cv, "id = ?", new String[]{id});
         return eksekusi;
     }
 }

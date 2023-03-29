@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class UbahActivity extends AppCompatActivity {
     private EditText etTanggal, etJam, etKegiatan;
@@ -31,5 +32,38 @@ public class UbahActivity extends AppCompatActivity {
         etTanggal.setText(yTanggal);
         etJam.setText(yJam);
         etKegiatan.setText(yKegiatan);
+
+        btnUbah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tanggal, jam, kegiatan;
+
+                tanggal = etTanggal.getText().toString();
+                jam = etJam.getText().toString();
+                kegiatan = etKegiatan.getText().toString();
+
+                if (tanggal.trim().equals("")){
+                    etTanggal.setError("Tanggal harus di isi");
+                }
+                else if (jam.trim().equals("")){
+                    etJam.setError("Jam harus di isi");
+                }
+                else if (kegiatan.trim().equals("")){
+                    etKegiatan.setError("Kegiatan harus di isi");
+                }
+                else {
+                    MyDatabaseHelper myDB = new MyDatabaseHelper(UbahActivity.this);
+                    long eks = myDB.ubahAgenda(yId,tanggal, jam, kegiatan);
+                    if (eks == -1){
+                        Toast.makeText(UbahActivity.this, "Ubah Data Gagal", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(UbahActivity.this, "Ubah Agenda Sukses", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                }
+            }
+        });
     }
 }
